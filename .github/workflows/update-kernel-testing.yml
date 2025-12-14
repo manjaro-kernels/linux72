@@ -1,0 +1,19 @@
+name: Update Kernel Testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: manjaro-kernels/kernel-action@master
+        with:
+          gitlab-pw: ${{ secrets.gitlab_server_user }}
+          build-mirror: ${{ secrets.BUILD_MIRROR }}
+          branch: "testing"
+          bump-kernel: true
+          bump-modules: "git"
+          gpg-key: ${{ secrets.GPG_KEY }}
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          bxt-api-key: ${{ secrets.BXT_API_KEY }}
